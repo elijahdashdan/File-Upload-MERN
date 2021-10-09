@@ -1,10 +1,10 @@
 'use strict';
 
-const uploadFile = require('../models/filesModel')
+const fileModel = require('../models/filesModel')
 
 async function FileUpload(req, res, next) {
   try {
-    const file = new uploadFile({
+    const file = new fileModel({
       fileName: req.file.originalname,
       filePath: req.file.path,
       fileType: req.file.mimetype,
@@ -19,11 +19,18 @@ async function FileUpload(req, res, next) {
 
 async function getFiles(req, res, next) {
   try {
-    const files = await uploadFile.find();
+    const files = await fileModel.find();
     res.status(200).send(files);
   } catch (error) {
     res.status(400).send(error.message);
   }
+}
+
+async function deleteFile(req, res, next) {
+  const id = req.params.id
+  await fileModel.findByIdAndRemove(id).exec();
+  res.send("Item Deleted")
+   
 }
 
 function humanFileSize(bytes, si = true, dp = 1) {
@@ -48,4 +55,4 @@ function humanFileSize(bytes, si = true, dp = 1) {
   return bytes.toFixed(dp) + ' ' + units[u];
 }
 
-module.exports = { FileUpload, getFiles }
+module.exports = { FileUpload, getFiles, deleteFile}
