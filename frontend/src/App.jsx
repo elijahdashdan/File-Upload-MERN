@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Header from './components/Header';
+import Header from './components/Header/Header';
 import './styles.css';
 import { Container, Row, Button, Table } from 'react-bootstrap';
-import UploadForm from './components/UploadForm';
+import UploadForm from './components/UploadForm/UploadForm';
 import { getFiles, FileDelete } from './data/api'
 
 function App() {
@@ -32,7 +32,7 @@ function App() {
     <div>
       <Header />
       <br></br>
-      <Container class="FileUploadScreen">
+      <Container className="FileUploadScreen">
         <Row>
           <UploadForm updateList={() => getFileList()} />
         </Row>
@@ -57,7 +57,7 @@ function App() {
                     <td>{file.filePath}</td>
                     <td>{file.fileType}</td>
                     <td>{file.fileSize}</td>
-                    <td><Button variant="outline-primary" onClick={() => deleteFile(file._id)}>Delete</Button></td>
+                    <td className="deleteButton" ><Button variant="outline-primary" onClick={() => deleteFile(file._id)}>Delete</Button></td>
                   </tr>
                 )}
               </tbody>

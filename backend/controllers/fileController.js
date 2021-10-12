@@ -14,7 +14,7 @@ async function FileUpload(req, res, next) {
       fileSize: humanFileSize(req.file.size)
     });
     await file.save()
-    res.status(201).send('File Uploaded Successfully');
+    res.status(201).send(file);
   } catch (error) {
     res.status(400).send(error.message);
   }
@@ -31,8 +31,12 @@ async function getFiles(req, res, next) {
 
 async function deleteFile(req, res, next) {
   const id = req.params.id
-  await fileModel.findByIdAndRemove(id).exec();
-  res.send("Item Successfully Deleted")
+  try {
+    await fileModel.findByIdAndRemove(id).exec();
+    res.status(200).send("Item Successfully Deleted")
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
    
 }
 

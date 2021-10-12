@@ -34,11 +34,11 @@ def upload(filepath):
     fileAbsPath = os.path.abspath(filepath)
     fileName = os.path.basename(filepath)
     fileType = mimetypes.MimeTypes().guess_type(filepath)[0]
+    headers = {}
     payload={}
     files=[
       ('file',(fileName,open(fileAbsPath,'rb'),fileType))
     ]
-    headers = {}
     response = requests.post(api_url + "uploadFile", headers=headers, data=payload, files=files)
 
 
@@ -56,7 +56,7 @@ def delete(filename):
     if (response.status_code) == 200:
         click.echo(filename + " Successfully Deleted")
     elif (response.status_code) == 404:
-        click.echo("Error deleting "+filename)
+        click.echo("Error deleting ["+filename)
 
 if __name__ == "__main__":
     main()
