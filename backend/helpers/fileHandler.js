@@ -3,7 +3,8 @@
 const path = require('path');
 const multer = require('multer');
 const fs = require('fs');
-
+const { promisify } = require('util')
+const unlinkAsync = promisify(fs.unlink)
 
 
 const storage = multer.diskStorage({
@@ -15,11 +16,7 @@ const storage = multer.diskStorage({
   }
 });
 
-const deleteTemp = fs.unlink(filePath, function (err) {
-  if (err) throw err;
-  console.log('File deleted!');
-});
-
 const upload = multer({ storage: storage })
 
-module.exports = { upload, deleteTemp }
+
+module.exports = { upload}

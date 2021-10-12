@@ -1,4 +1,7 @@
 'use strict';
+const fs = require('fs');
+const { promisify } = require('util')
+const unlinkAsync = promisify(fs.unlink)
 
 const fileModel = require('../models/filesModel')
 
@@ -29,7 +32,7 @@ async function getFiles(req, res, next) {
 async function deleteFile(req, res, next) {
   const id = req.params.id
   await fileModel.findByIdAndRemove(id).exec();
-  res.send("Item Deleted")
+  res.send("Item Successfully Deleted")
    
 }
 

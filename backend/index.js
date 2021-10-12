@@ -17,16 +17,18 @@ const app = express()
 // Use CORS for resource sharing
 app.use(cors());
 
+//Connect to Mongoose DB
 mongoose.connect('mongodb://localhost/upload-files-database', {useNewUrlParser: true,useUnifiedTopology: true});
-
 app.use(bodyParser.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api',fileRoutes.routes)
 
+//Check Root Running
 app.get("/", function(req,res){
     res.send("Server is Running")
 })
 
+//Listen to Port running
 app.listen(port, function() {
     console.log(`Server is Running! http://localhost:${port}`)
 });

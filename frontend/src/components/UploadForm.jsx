@@ -4,6 +4,7 @@ import { fileUpload } from '../data/api';
 
 
 function UploadForm(props) {
+    
     const [uploadFile, setUploadFile] = useState('');
     console.log(uploadFile)
     function uploadFileChange(event) {
