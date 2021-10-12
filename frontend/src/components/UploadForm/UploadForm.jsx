@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Row, Form, Image, Button } from 'react-bootstrap';
+import { Row, Form, Image} from 'react-bootstrap';
 import { fileUpload } from '../../data/api';
+import UploadButton from '../UploadButton/UploadButton';
 
 
 function UploadForm(props) {
@@ -34,10 +35,8 @@ function UploadForm(props) {
                         <Form.Control onChange={(event) => uploadFileChange(event)} type="file" size="lg" />
                     </Form.Group>
                 </Form>
+                <UploadButton onClick = {uploadFileClick} />
             </Row>
-            <div className="uploadButton">
-            <Button variant="primary" size="lg" onClick={uploadFileClick}>Upload</Button>{' '}
-            </div>
         </div>
 
     )

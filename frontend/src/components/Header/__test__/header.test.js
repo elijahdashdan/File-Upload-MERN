@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Header from '../Header';
-import {render} from '@testing-library/react';
+import renderer from 'react-test-renderer';
 
 it("Renders without Crashing", () => {
     const div = document.createElement("div");
@@ -9,6 +9,9 @@ it("Renders without Crashing", () => {
     ReactDOM.unmountComponentAtNode(div)
 })
 
-it("Renders Headers component correctly", () => {
-    render()
-})
+it('renders correctly', () => {
+    const tree = renderer
+      .create(<Header />)
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+});
