@@ -1,0 +1,20 @@
+#Dockerfile for React client
+
+#Build Docker Client
+FROM node:14-alpine
+
+# Create App Directory
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+#Adding node modules to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
+
+#Install app dependencies
+COPY package*.json ./
+RUN npm install
+
+# Copy Local files to app folder
+COPY . .
+
+CMD ["npm", "start"]
